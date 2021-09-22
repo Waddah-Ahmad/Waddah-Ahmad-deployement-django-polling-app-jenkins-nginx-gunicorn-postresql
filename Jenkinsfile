@@ -12,10 +12,7 @@ pipeline {
             }
         }
         stage('Deploy to staging area') { 
-            input{
-                massage "shall we deploy to the production?"
-                ok 'yes please'
-            }
+            
             steps {
                 sh 'ssh -o StricHostKeyChecking=no deployment-user@192.168.56.107 "source venv/bin/activate; \ 
                 cd polling;\
@@ -28,6 +25,10 @@ pipeline {
             }
 
         stage('Deploy to production') { 
+            input{
+                massage "shall we deploy to the production?"
+                ok 'yes please'
+            }
             steps {
                 sh 'ssh -o StricHostKeyChecking=no deployment-user@192.168.56.101 "source venv/bin/activate; \ 
                 cd polling;\
